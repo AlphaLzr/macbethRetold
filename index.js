@@ -203,10 +203,22 @@ const battle = {
   initiated: false,
 };
 
+let msPrev = window.performance.now()
+const fps = 60
+const msPerFrame = 1000 / fps
 let frames = 0
 
 function animate() {
   const animationId = window.requestAnimationFrame(animate);
+
+  const msNow = window.performance.now()
+  const msPassed = msNow - msPrev
+
+  if (msPassed < msPerFrame) return
+
+  const excessTime = msPassed % msPerFrame
+  msPrev = msNow - excessTime
+
   frames++
 
   // Clear the canvas
@@ -300,7 +312,7 @@ function animate() {
     checkForCharacterCollision({
       characters,
       player,
-      characterOffset: { x: 0, y: 3 },
+      characterOffset: { x: 0, y: 5 },
     });
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -312,7 +324,7 @@ function animate() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y + 3,
+              y: boundary.position.y + 5,
             },
           },
         })
@@ -324,7 +336,7 @@ function animate() {
 
     if (moving)
       movables.forEach((movable) => {
-        movable.position.y += 3;
+        movable.position.y += 5;
       });
   } else if (keys.a.pressed && lastKey === "a") {
     player.animate = true;
@@ -333,7 +345,7 @@ function animate() {
     checkForCharacterCollision({
       characters,
       player,
-      characterOffset: { x: 3, y: 0 },
+      characterOffset: { x: 5, y: 0 },
     });
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -344,7 +356,7 @@ function animate() {
           rectangle2: {
             ...boundary,
             position: {
-              x: boundary.position.x + 3,
+              x: boundary.position.x + 5,
               y: boundary.position.y,
             },
           },
@@ -357,7 +369,7 @@ function animate() {
 
     if (moving)
       movables.forEach((movable) => {
-        movable.position.x += 3;
+        movable.position.x += 5;
       });
   } else if (keys.s.pressed && lastKey === "s") {
     player.animate = true;
@@ -366,7 +378,7 @@ function animate() {
     checkForCharacterCollision({
       characters,
       player,
-      characterOffset: { x: 0, y: -3 },
+      characterOffset: { x: 0, y: -5 },
     });
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -378,7 +390,7 @@ function animate() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y - 3,
+              y: boundary.position.y - 5,
             },
           },
         })
@@ -390,7 +402,7 @@ function animate() {
 
     if (moving)
       movables.forEach((movable) => {
-        movable.position.y -= 3;
+        movable.position.y -= 5;
       });
   } else if (keys.d.pressed && lastKey === "d") {
     player.animate = true;
@@ -399,7 +411,7 @@ function animate() {
     checkForCharacterCollision({
       characters,
       player,
-      characterOffset: { x: -3, y: 0 },
+      characterOffset: { x: -5, y: 0 },
     });
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -410,7 +422,7 @@ function animate() {
           rectangle2: {
             ...boundary,
             position: {
-              x: boundary.position.x - 3,
+              x: boundary.position.x - 5,
               y: boundary.position.y,
             },
           },
@@ -423,7 +435,7 @@ function animate() {
 
     if (moving)
       movables.forEach((movable) => {
-        movable.position.x -= 3;
+        movable.position.x -= 5;
       });
   }
 }
