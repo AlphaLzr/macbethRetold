@@ -203,47 +203,35 @@ const battle = {
   initiated: false,
 };
 
-let msPrev = window.performance.now();
-const fps = 60;
-const msPerFrame = 1000 / fps;
-let frames = 0;
+let msPrev = window.performance.now()
+const fps = 60
+const msPerFrame = 1000 / fps
+let frames = 0
 
 function animate() {
   const animationId = window.requestAnimationFrame(animate);
 
-  const msNow = window.performance.now();
-  const msPassed = msNow - msPrev;
+  const msNow = window.performance.now()
+  const msPassed = msNow - msPrev
 
-  if (msPassed < msPerFrame) return;
+  if (msPassed < msPerFrame) return
 
-  const excessTime = msPassed % msPerFrame;
-  msPrev = msNow - excessTime;
+  const excessTime = msPassed % msPerFrame
+  msPrev = msNow - excessTime
 
-  frames++;
-
-  // Simulate spacebar press event at the start of the game
-  if (!player.isInteracting && !player.interactionAsset) {
-    // beginning the conversation
-    const firstMessage = "How did I get here?";
-    document.querySelector("#characterDialogueBox").innerHTML = firstMessage;
-    document.querySelector("#characterDialogueBox").style.display = "flex";
-    player.isInteracting = true;
-  }
+  frames++
 
   // Clear the canvas
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   // Check if the camera has reached the end of the canvas
-  const reachedEndX =
-    player.position.x < offset.x || player.position.x > offset.x + canvas.width;
-  const reachedEndY =
-    player.position.y < offset.y ||
-    player.position.y > offset.y + canvas.height;
+  const reachedEndX = player.position.x < offset.x || player.position.x > offset.x + canvas.width;
+  const reachedEndY = player.position.y < offset.y || player.position.y > offset.y + canvas.height;
 
   // Render the game elements
   if (reachedEndX || reachedEndY) {
     // Render black background
-    c.fillStyle = "black";
+    c.fillStyle = 'black';
     c.fillRect(0, 0, canvas.width, canvas.height);
   } else {
     // Render the image background
@@ -452,8 +440,8 @@ function animate() {
   }
 }
 setInterval(() => {
-  console.log(frames);
-}, 1000);
+  console.log(frames)
+}, 1000)
 // animate()
 
 let lastKey = "";
