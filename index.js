@@ -205,6 +205,25 @@ const battle = {
 
 function animate() {
   const animationId = window.requestAnimationFrame(animate);
+
+  // Clear the canvas
+  c.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Check if the camera has reached the end of the canvas
+  const reachedEndX = player.position.x < offset.x || player.position.x > offset.x + canvas.width;
+  const reachedEndY = player.position.y < offset.y || player.position.y > offset.y + canvas.height;
+
+  // Render the game elements
+  if (reachedEndX || reachedEndY) {
+    // Render black background
+    c.fillStyle = 'black';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+  } else {
+    // Render the image background
+    background.draw();
+  }
+
+  // Render the rest of the elements
   renderables.forEach((renderable) => {
     renderable.draw();
   });
