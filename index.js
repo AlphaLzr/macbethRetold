@@ -203,8 +203,11 @@ const battle = {
   initiated: false,
 };
 
+let frames = 0
+
 function animate() {
   const animationId = window.requestAnimationFrame(animate);
+  frames++
 
   // Clear the canvas
   c.clearRect(0, 0, canvas.width, canvas.height);
@@ -424,6 +427,9 @@ function animate() {
       });
   }
 }
+setInterval(() => {
+  console.log(frames)
+}, 1000)
 // animate()
 
 let lastKey = "";
