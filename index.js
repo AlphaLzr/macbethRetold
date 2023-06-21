@@ -67,6 +67,9 @@ villagerImg.src = "./img/villager/Idle.png";
 const oldManImg = new Image();
 oldManImg.src = "./img/oldMan/Idle.png";
 
+const priestImg = new Image();
+priestImg.src = "./img/priest/Idle.png";
+
 charactersMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
     // 1026 === villager
@@ -84,7 +87,7 @@ charactersMap.forEach((row, i) => {
           },
           scale: 3,
           animate: true,
-          dialogue: ["...", "Hey mister, have you seen my Doggochu?"],
+          dialogue: ["...", "Hail Macbeth.", "Your castle awaits."],
         })
       );
     }
@@ -102,7 +105,39 @@ charactersMap.forEach((row, i) => {
             hold: 60,
           },
           scale: 3,
-          dialogue: ["My bones hurt."],
+          dialogue: [
+            "Hail Macbeth.",
+            "The townsfolk are ecstatic for your return.",
+          ],
+        })
+      );
+    }
+    // 1011 === priestEntity
+    else if (symbol === 1011) {
+      characters.push(
+        new Character({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
+          },
+          image: priestImg,
+          frames: {
+            max: 4,
+            hold: 60,
+          },
+          scale: 3,
+          dialogue: [
+            "Hail Macbeth, Castle this way.",
+            "THANKS FOR PLAYING.",
+            "This is all thats in the current version. I was a tad bit ambitious with the whole, yk, making a game thing.",
+            "Up here Macbeth would travel to his castle, where lady Macbeth would tell him to go to the forest in search of power, as it came to her in a dream.",
+            "He would agree and begin to travel to the forest, meeting 3 witches on his way. You know what they say already.",
+            "He would continute on, and you would need to fight against monsters on your way there. A short demo of the fight is included in the game, leftmost part of the map. Darker grass.",
+            "Please note the sprites used there are placeholders only.",
+            "Macbeth would eventually find the treasure, and returns to his castle with it, where he discoveres it belongs to the king.",
+            "Not wanting to rid of his treasure, he attempts to kill the king.",
+            "You know the rest.",
+          ],
         })
       );
     }
@@ -218,6 +253,7 @@ const texts = [
   "Blasphemy. Thou'st lies from thee toungue.",
   "So why do I choose to follow the lies you spread?",
   "I guess lady fate shall choose the outcome of my greed.",
+  "WASD to move. Space to interact.",
 ];
 
 let currentTextIndex = 0; // Index of the current text being displayed
@@ -569,7 +605,7 @@ window.addEventListener("keyup", (e) => {
 
 let clicked = 0;
 addEventListener("click", () => {
-  clicked++
+  clicked++;
   if (clicked === 4) {
     audio.Map.play();
   }
